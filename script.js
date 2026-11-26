@@ -35,51 +35,50 @@ if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
 
-// DEMONSTRATION STUDENT LOGIN (Safe check added so it doesn't crash if ID is missing)
+// STUDENT LOGIN & ENQUIRY SUBMISSION (Allows FormSubmit redirect)
 const loginForm = document.getElementById("loginForm");
 const loginMessage = document.getElementById("loginMessage");
 
 if (loginForm && loginMessage) {
   loginForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const fullName = document.getElementById("fullName").value.trim();
-    const admission = document.getElementById("admission").value.trim();
-    const phone = document.getElementById("phone").value.trim();
+    const fullName = document.getElementById("fullName")?.value.trim() || "";
+    const admission = document.getElementById("admission")?.value.trim() || "";
+    const phone = document.getElementById("phone")?.value.trim() || "";
 
     if (!fullName || !admission || !phone) {
+      event.preventDefault();
       loginMessage.textContent = "Please complete all the fields.";
       loginMessage.style.color = "#c62828";
       return;
     }
 
-    loginMessage.textContent = `Welcome, ${fullName}! Your demonstration login is complete.`;
+    loginMessage.textContent = `Submitting details for ${fullName}...`;
     loginMessage.style.color = "#16814d";
   });
 }
 
 // PHOTO SLIDESHOW
 const slides = [
-    {
-        image: "images (1).jpg",
-        caption: "image of the school",
-        number: "1 / 4"
-    },
-    {
-        image: "studentsz.png",
-        caption: "Students posing for a photo",
-        number: "2 / 4"
-    },
-    {
-        image: "computer lab.png",
-        caption: "Computer laboratory",
-        number: "3 / 4"
-    },
-    {
-        image: "library.jpg.png",
-        caption: "School library",
-        number: "4 / 4"
-    }
+  {
+    image: "images (1).jpg",
+    caption: "image of the school",
+    number: "1 / 4"
+  },
+  {
+    image: "studentsz.png",
+    caption: "Students posing for a photo",
+    number: "2 / 4"
+  },
+  {
+    image: "computer lab.png",
+    caption: "Computer laboratory",
+    number: "3 / 4"
+  },
+  {
+    image: "library.jpg.png",
+    caption: "School library",
+    number: "4 / 4"
+  }
 ];
 
 const slideImage = document.getElementById("slideImage");
@@ -114,7 +113,7 @@ if (slideDots) {
 
 function showSlide(index) {
   if (!slideImage) return;
-  
+
   currentSlide = (index + slides.length) % slides.length;
   const slide = slides[currentSlide];
 
@@ -122,9 +121,9 @@ function showSlide(index) {
 
   window.setTimeout(() => {
     slideImage.src = slide.image;
-    slideImage.alt = slide.caption; // Fixed from slide.alt to slide.caption
+    slideImage.alt = slide.caption;
     if (slideCaption) slideCaption.textContent = slide.caption;
-    if (slideNumber) slideNumber.textContent = slide.number; // Uses your array's number format ("1 / 4")
+    if (slideNumber) slideNumber.textContent = slide.number;
 
     slideImage.onload = () => {
       slideImage.style.opacity = "1";
@@ -151,7 +150,7 @@ function startSlideshow() {
 
   slideshowTimer = window.setInterval(() => {
     showSlide(currentSlide + 1);
-  }, 4000); // Changes every 4 seconds
+  }, 4000);
 }
 
 function restartSlideshow() {
