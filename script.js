@@ -35,7 +35,7 @@ if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
 
-// STUDENT LOGIN & ENQUIRY SUBMISSION (Allows FormSubmit redirect)
+// STUDENT LOGIN & ENQUIRY SUBMISSION
 const loginForm = document.getElementById("loginForm");
 const loginMessage = document.getElementById("loginMessage");
 
@@ -44,10 +44,11 @@ if (loginForm && loginMessage) {
     const fullName = document.getElementById("fullName")?.value.trim() || "";
     const admission = document.getElementById("admission")?.value.trim() || "";
     const phone = document.getElementById("phone")?.value.trim() || "";
+    const email = document.getElementById("email")?.value.trim() || "";
 
-    if (!fullName || !admission || !phone) {
+    if (!fullName || !admission || !phone || !email) {
       event.preventDefault();
-      loginMessage.textContent = "Please complete all the fields.";
+      loginMessage.textContent = "Please complete all required fields.";
       loginMessage.style.color = "#c62828";
       return;
     }
@@ -93,7 +94,6 @@ let currentSlide = 0;
 let slideshowTimer;
 let touchStartX = 0;
 
-// Build the navigation dots only if slideDots exists in HTML
 if (slideDots) {
   slides.forEach((slide, index) => {
     const dot = document.createElement("button");
@@ -171,7 +171,6 @@ if (nextSlide) {
   });
 }
 
-// Pause automatic changes while the mouse is over the slideshow.
 if (slideshow) {
   slideshow.addEventListener("mouseenter", () => {
     window.clearInterval(slideshowTimer);
@@ -179,7 +178,6 @@ if (slideshow) {
 
   slideshow.addEventListener("mouseleave", startSlideshow);
 
-  // Support swiping between photos on phones.
   slideshow.addEventListener("touchstart", (event) => {
     touchStartX = event.changedTouches[0].screenX;
   }, { passive: true });
@@ -195,7 +193,6 @@ if (slideshow) {
   }, { passive: true });
 }
 
-// Display the first photo and begin automatic rotation.
 if (slideImage) {
   showSlide(0);
   startSlideshow();
