@@ -375,20 +375,20 @@
     <a href="#top" class="back-top">Back to top ↑</a>
   </footer>
 
-  <script src="script.js">
+  <script src="script.js"></script>
+  <script>
     document.addEventListener("DOMContentLoaded", () => {
-  const loginForm = document.getElementById("loginForm");
-  const loginMessage = document.getElementById("loginMessage");
+      const loginForm = document.getElementById("loginForm");
+      const loginMessage = document.getElementById("loginMessage");
 
-  if (loginForm) {
-    loginForm.addEventListener("submit", () => {
-      if (loginMessage) {
-        loginMessage.textContent = "Submitting your details...";
+      if (loginForm) {
+        loginForm.addEventListener("submit", () => {
+          if (loginMessage) {
+            loginMessage.textContent = "Submitting your details...";
+          }
+        });
       }
-      // Do not call e.preventDefault() so the browser posts to FormSubmit and redirects
     });
-  }
-});
   </script>
 </body>
 </html>
